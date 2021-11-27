@@ -3,6 +3,7 @@ package com.company;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 public class CrackerCracking extends Thread{
 	Cracker cracker;
@@ -57,13 +58,8 @@ public class CrackerCracking extends Thread{
 	
 	public String decryption(String encrypted , String key) {
 		String solved="";
-		for(int j =0 ; j < encrypted.length();j++) {
-			for(int i =0 ; i< 26 ;i++) {
-				if(key.charAt(i)==encrypted.charAt(j)) {
-					solved+=tempString.charAt(i);
-					break;
-				}
-			}
+		for(int j =0 ; j < key.length();j++) {
+			solved += key.charAt(j)+1;
 		}
 		return solved;
 	}
@@ -81,6 +77,8 @@ public class CrackerCracking extends Thread{
 			}
 			Request rq = cracker.requests.element();
 			String keyString = getKey(rq.getHash());
+			System.out.println(keyString);
+			System.out.println(rq.hash);
 			String decryptedMsg = decryption(rq.hash, keyString);
 			cracker.requests.remove();
 			cracker.crackerConnection.sendMsgToServer(decryptedMsg+" "+rq.clientId+" requestId"+" "+rq.reqId);

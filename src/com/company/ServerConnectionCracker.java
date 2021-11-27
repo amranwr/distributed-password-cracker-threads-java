@@ -68,12 +68,11 @@ public class ServerConnectionCracker extends Thread{
 				}
 				else {
 					String[] inputString = input.split(" ");
-					System.out.print(input);
 					for(int i=0 ; i < server.clients.size();i++){
 						if(server.clients.get(i).id== Integer.parseInt(inputString[1])) {
-							DataOutputStream data = new DataOutputStream(server.clients.get(i).socket.getOutputStream());
-							data.writeUTF(input);
-							data.flush();
+							server.connections.get(i).sendMsg("cracked password : "+inputString[0]);
+							//data.writeUTF(input);
+							//data.flush();
 						}
 					}	
 				}
