@@ -9,12 +9,12 @@ server:
 - server distribute workload from clients to the crackers.
 
 
-cracker:- 
+cracker:
 - trying to break the encrypted password.
 
 
-client:-
--want to crack password and gives order through command line.
+client:
+- want to crack password and gives order through command line.
 
 
 
